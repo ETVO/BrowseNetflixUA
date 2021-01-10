@@ -1,0 +1,45 @@
+﻿<section>
+    <div class="container">
+        <div class="py-2 mb-3">
+            <h2 data-bind="text:displayName"></h2>
+            <h6 data-bind="text:'Id:'+'  '+Id()"></h6>
+            <h3 data-bind="text:Name"></h3>
+        </div>
+
+        <div class="row">
+        
+    </div>
+    
+   
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Filmes</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">ReleaseYear</th>
+                            <th scope="col">TypeName</th>
+                            
+                            <th scope="col" class="text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: records">
+                        <tr>
+                            <td data-bind="text:Id"></td>
+                            <td data-bind="text:Name"></td>
+                            <td data-bind="text:Description"></td>
+                            <td data-bind="text:ReleaseYear"></td>
+                            <td data-bind="text:TypeName"></td>
+                            <td class="text-right">
+
+                                <button class="btn btn-sm">
+                                    <i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_'+Id }" title="Selecione para adicionar aos favoritos"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+    </div>
+</section>
