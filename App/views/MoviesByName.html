@@ -2,10 +2,7 @@
     <h1>Movies by name</h1>
     <form class="form-inline my-2 my-lg-0 d-none d-lg-block">
         <div class="form-group btn-group-sm">
-            <!--O mais importante desta linha é o 'value: searchPokemon'. Basicamente, estamos a atribuir o valor do input
-            na variável 'searchPokemon', que irá estar a ser observada pelo knockout. Se o valor do input for alterado, o knockout
-            irá atualizar a pagina com o novo nome do pokemon pesquisado
-            -->
+          
             <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search" data-bind="value: searchMovies">
             <button data-bind="click: getMovies" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </div>
