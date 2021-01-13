@@ -11,33 +11,19 @@
             router.map([
                 { route: '', title:'Welcome', moduleId: 'viewmodels/welcome', nav: true },
                
-
-                { route: 'Movies', title: 'Moveis', moduleId: 'viewmodels/Movies', nav: true },
-                { route: 'Movies(/:id)', title: 'Movies', moduleId: 'viewmodels/Movies', hash: '#Movies', nav: false },
-
-
-
+                { route: 'Titles', title: 'Titles', moduleId: 'viewmodels/Titles', nav: true },
+                { route: 'Titles(/:id)', title: 'Titles', moduleId: 'viewmodels/Titles', hash: '#Titles', nav: false },
                 
                 { route: 'Actors', title: 'Actors', moduleId: 'viewmodels/Actors', nav: true },
                 { route: 'Actors(/:id)', title: 'Actors', moduleId: 'viewmodels/Actors', hash: '#Actors', nav: false },
 
-
-
-
-
-
-
-
-                { route: 'MoviesDetails', title: 'Moveis', moduleId: 'viewmodels/MoviesDetails', nav: false },
-                { route: 'MoviesDetails(/:id)', title: 'Movies Details', moduleId: 'viewmodels/MoviesDetails', hash: '#MoviesDetails', nav: false },
+                { route: 'TitleDetails', title: 'Moveis', moduleId: 'viewmodels/TitleDetails', nav: false },
+                { route: 'TitleDetails(/:id)', title: 'Titles Details', moduleId: 'viewmodels/TitleDetails', hash: '#TitleDetails', nav: false },
 
                 { route: 'CategoriesDetails', title: 'Categories', moduleId: 'viewmodels/CategoriesDetails', nav: false },
                 { route: 'CategoriesDetails(/:id)', title: 'Categories', moduleId: 'viewmodels/CategoriesDetails', hash: '#CategoriesDetails', nav: false },
 
-
-
-
-                { route: 'MoviesByName(/:id)', title: 'Search movie by name', moduleId: 'viewmodels/MoviesByName', hash: '#MoviesByName', nav: true}
+                { route: 'TitlesByName(/:id)', title: 'Search', moduleId: 'viewmodels/TitlesByName', hash: '#TitlesByName', nav: true}
 
             ]).buildNavigationModel();
             

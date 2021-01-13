@@ -19,7 +19,7 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'bootstrap'],
     system.debug(true);
     //>>excludeEnd("build");
 
-    app.title = 'Netflix ITW';
+    app.title = 'Browse Netlix UA';
 
     app.configurePlugins({
         router: true,
