@@ -1,4 +1,5 @@
 ﻿const PAGE_SIZE = 20;
+const IMDB_URI = "https://sg.media-imdb.com/suggests/";
 
 define(['durandal/app'], function (app) {
     var vm = function () {
@@ -51,7 +52,7 @@ define(['durandal/app'], function (app) {
             else if (self.currentPage() >= self.totalPages() - Math.round(showNumber/2))
                 step = self.totalPages() - showNumber;
             else
-                step = Math.max(self.currentPage() - 5, 0);
+                step = Math.max(self.currentPage() - Math.round(showNumber / 2), 0);
 
             for (var i = 1; i <= size; i++)
                 list.push(i + step);

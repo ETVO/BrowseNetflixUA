@@ -5,51 +5,28 @@
         </div>
 
         <!-- ko if:records().length > 0 -->
-        <div class="col-12 small">
-            <div class="row">
-                <p class="mr-auto pt-2">
-                    <span class="a" data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                    <span class="a" data-bind="html: 'Titles: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
-                </p>
-                <div class="col-auto pt-2">
-                    <ul class="pagination">
-                        <!-- ko if: currentPage() > 3 && totalPages() > 10 -->
-                        <li class="page-item"><a class="page-link" title="First Page" href="#Titles/1">⇤</a></li>
-                        <li class="page-item"><a class="page-link" title="Previous Page" data-bind="attr: {href:'#Titles/' + previousPage(),  rel:'prev'}">Previous</a></li>
-                        <li class="page-item disabled"><a class="page-link">…</a></li>
-                        <!-- /ko -->
-                        <!-- ko foreach: pageArray()-->
-                        <!-- ko if:$data == $parent.currentPage() -->
-                        <li class="active page-item"><a class="page-link" data-bind="attr: {title:'Current Page '+$data }, text:$data"></a></li>
-                        <!-- /ko -->
-                        <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: {href:'#Titles/' + $data, title:'Goto Page '+$data }, text:$data"></a></li>
-                        <!-- /ko -->
-                        <!-- /ko -->
-                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <!--<li class="disabled page-item"><a class="page-link">…</a></li>-->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: {href:'#Titles/' + nextPage(), rel:'next' }">Next</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: {href:'#Titles/' + totalPages() }">⇥</a></li>
-                        <!-- /ko -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
+
+        <div data-bind="template: { name: 'pagination-template' }"></div>
+        <!--<div class="clearfix"></div>-->
 
 
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Title</th>
+                    <!--<th scope="col">Released</th>-->
+                    <th scope="col">Type</th>
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
             <tbody data-bind="foreach: records">
                 <tr>
-                    <td data-bind="text:Id"></td>
-                    <td data-bind="text:Name"></td>
+                    <td>
+                        <h4 data-bind="text: Name"></h4>
+                        <span data-bind="text: ReleaseYear"></span>
+                    </td>
+                    <!--<td data-bind="text:ReleaseYear"></td>-->
+                    <td data-bind="text:TypeName"></td>
                     <td class="text-right">
                         <a class="btn  btn-sm" data-bind="attr: { href:'#TitleDetails/'+Id }">
                             <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
@@ -62,6 +39,7 @@
             </tbody>
         </table>
 
+        <div data-bind="template: { name: 'pagination-template' }"></div>
         <!-- /ko -->
         <!-- ko ifnot:records().length > 0 -->
         <h3 data-bind="text:notFound()[0]"></h3>
@@ -76,11 +54,37 @@
 
 
     </div>
-
-
-<style>
-
-
-</style>
-
 </section>
+
+<script type="text/html" id="pagination-template">
+    <div class="col-12 pages">
+        <div class="row">
+            <p class="mr-auto pt-2">
+                <span class="a" data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
+                <span class="a" data-bind="html: 'Titles: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+            </p>
+            <div class="col-auto pt-2">
+                <ul class="pagination">
+                    <!-- ko if: currentPage() > 3 && totalPages() > 10 -->
+                    <li class="page-item"><a class="page-link" title="First Page" href="#Titles/1">⇤</a></li>
+                    <li class="page-item"><a class="page-link" title="Previous Page" data-bind="attr: {href:'#Titles/' + previousPage(),  rel:'prev'}">Previous</a></li>
+                    <!--<li class="page-item disabled"><a class="page-link">…</a></li>-->
+                    <!-- /ko -->
+                    <!-- ko foreach: pageArray()-->
+                    <!-- ko if:$data == $parent.currentPage() -->
+                    <li class="active page-item"><a class="page-link" data-bind="attr: {title:'Current Page '+$data }, text:$data"></a></li>
+                    <!-- /ko -->
+                    <!-- ko if:$data != $parent.currentPage() -->
+                    <li class="page-item"><a class="page-link" data-bind="attr: {href:'#Titles/' + $data, title:'Goto Page '+$data }, text:$data"></a></li>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
+                    <!--<li class="page-item disabled"><a class="page-link">…</a></li>-->
+                    <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: {href:'#Titles/' + nextPage(), rel:'next' }">Next</a></li>
+                    <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: {href:'#Titles/' + totalPages() }">⇥</a></li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</script>
