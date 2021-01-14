@@ -61,7 +61,6 @@ function doCORSRequest(options, getResult) {
             outputField.innerHTML = JSON.stringify(data, null, "  ");
             outputField.innerHTML = urlify(outputField.innerHTML);
 
-            console.log(data);
             printTable(data);
 
             return hljs.highlightBlock(outputField);
@@ -174,8 +173,6 @@ function getActorURL(name, titleId) {
         result = result.replace("imdb$" + getTitleSlug(name) + "(", '').slice(0, -1);
         data = JSON.parse(result);
 
-        console.log(name, data);
-
         var index = data.d.findIndex(i => i.l.toLowerCase().replace(/\(([^)]+)\)/, '').trim() === name.toLowerCase());
 
         if (index == -1)
@@ -208,10 +205,4 @@ function getTitleSlug(title) {
     var name = title.trim().normalize("NFKD").replaceAll(/[^\w\s]/gi, '').replaceAll(' ', '-').toLowerCase();
 
     return name;
-}
-
-
-if (typeof console === 'object') {
-    console.log('// To test a local CORS Anywhere server, set cors_api_url. For example:');
-    console.log('cors_api_url = "http://localhost:8080/"');
 }
