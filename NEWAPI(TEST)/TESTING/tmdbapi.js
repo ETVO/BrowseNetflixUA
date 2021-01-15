@@ -108,14 +108,15 @@ $().ready(function () {
 
 
 
-                    $("#ver").click(function () {
+                    $("#vermais").click(function () {
+                        
                         var idtmbd = data.id;
 
 
 
 
 
-                       // $('#myModal').modal('show'); 
+                      $('#secondmodal').modal('show');
 
                         var self = this;
                  
@@ -144,12 +145,12 @@ $().ready(function () {
                                 if (data.production_companies.length>0 && data.production_companies[0].logo_path) {
                                     self.production_companies(data.production_companies[0].logo_path)
                                     var imgempresa = urlimages + self.production_companies()
-                                    console.log(imgempresa)
-                                    document.getElementById("img2").setAttribute("src", imgempresa);
+                                    console.log("logoempresa:  "+imgempresa)
+                                    document.getElementById("cardimg2").setAttribute("src", imgempresa);
                                    
                                 }
                                 else {
-                                    document.getElementById("img2").setAttribute("src", semimagemurl);
+                                    document.getElementById("cardimg2").setAttribute("src", semimagemurl);
 
                                     
                                 }

@@ -1,172 +1,202 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Home - Netflix API Usage Demo</title>
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="../Content/font-awesome.min.css" rel="stylesheet" />
-    <link href="netflix.css" rel="stylesheet" />
-    <style>
+﻿    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Home - Netflix API Usage Demo</title>
+        <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+        <link href="../Content/font-awesome.min.css" rel="stylesheet" />
+        <link href="netflix.css" rel="stylesheet" />
+        <style>
 
 
 
-        .modal-dialog {
-            max-width: 800px;
-            margin: 30px auto;
-        }
+            .modal-dialog {
+                max-width: 800px;
+                margin: 30px auto;
+            }
 
 
 
-        .modal-body {
-            position: relative;
-            padding: 0px;
-        }
+            .modal-body {
+                position: relative;
+                padding: 0px;
+            }
 
-        .close {
-            position: absolute;
-            right: -30px;
-            top: 0;
-            z-index: 999;
-            font-size: 2rem;
-            font-weight: normal;
-            color: #fff;
-            opacity: 1;
-        }
+            .close {
+                position: absolute;
+                right: -30px;
+                top: 0;
+                z-index: 999;
+                font-size: 2rem;
+                font-weight: normal;
+                color: #fff;
+                opacity: 1;
+            }
+          
 
-    </style>
-</head>
-<body>
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+        </style>
+    </head>
+    <body>
+        <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html" title="Netflix API Usage Demo@by jsp"><img src="../images/netflixIcon.png" height="30" class="d-inline-block align-top" alt="" loading="lazy"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Pesquise o seu filme(teste)<span class="sr-only">(current)</span></a>
+                        </li>
+
+                    </ul>
+                    <div class="form-inline my-2 my-lg-0">
+                        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button id="a" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+
+
         <div class="container">
-            <a class="navbar-brand" href="index.html" title="Netflix API Usage Demo@by jsp"><img src="../images/netflixIcon.png" height="30" class="d-inline-block align-top" alt="" loading="lazy"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Pesquise o seu filme(teste)<span class="sr-only">(current)</span></a>
-                    </li>
 
-                </ul>
-                <div class="form-inline my-2 my-lg-0">
-                    <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button id="a" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+
+
+            <h1 id="tit"> </h1>
 
 
 
 
+            <br />
 
 
+            <div class="row">
 
-    <div class="container">
+                <div class="card" style="width: 18rem;">
 
+                    <div class="card-body">
 
+                        <img id="img" class="card-img-top" src="https://lh3.googleusercontent.com/proxy/npf9OZGh-pu0Aka815X_ibFeI9MJ1EqDovJlb4B3NGdhYytPLQ787WVqZVbi-4Ba9VD7waxE2gZAOawVj8WURrFQCk9Lp7smDMZjFbkb03JQqa2nFIHrXJf7HYrs_2A4IAuUvyqlgIJYiwzbpS7SIlToNGMzEVjSTRS1eb9ftakq_AgqhQsp" alt="Card image cap">
+                        <br />
+                        <br />
 
-        <h1 id="tit"> </h1>
-
-
-
-
-        <br />
-
-
-        <div class="row">
-
-            <div class="card" style="width: 18rem;">
-
-                <div class="card-body">
-
-                    <img id="img" class="card-img-top" src="https://lh3.googleusercontent.com/proxy/npf9OZGh-pu0Aka815X_ibFeI9MJ1EqDovJlb4B3NGdhYytPLQ787WVqZVbi-4Ba9VD7waxE2gZAOawVj8WURrFQCk9Lp7smDMZjFbkb03JQqa2nFIHrXJf7HYrs_2A4IAuUvyqlgIJYiwzbpS7SIlToNGMzEVjSTRS1eb9ftakq_AgqhQsp" alt="Card image cap">
-                    <br />
-                    <br />
-
-                </div>
-            </div>
-
-        </div>
-
-
-
-        <h1 color="red" id="nomefilme" class="display-4"> </h1>
-
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Sinopse</a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <p id="ca"></p>
                     </div>
                 </div>
 
             </div>
-        </div>
-
-        <a id="vervideo" class="btn btn-primary video-btn"  data-toggle="modal" data-target="#myModal">Ver video</a>
-        <a id="ver" class="btn btn-primary">Ver Mais</a>
 
 
 
-    </div>
+            <h1 color="red" id="nomefilme" class="display-4"> </h1>
 
-
-    <!-- Modal -->
-    <!-- Button trigger modal -->
- 
-
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-
-                <div class="modal-body">
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <!-- 16:9 aspect ratio -->
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Sinopse</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <p id="ca"></p>
+                        </div>
                     </div>
 
+                </div>
+            </div>
+
+            <a id="vervideo" class="btn btn-primary video-btn" data-toggle="modal" data-target="#myModal">Ver video</a>
+            <a id="vermais" class="btn btn-primary">Ver Mais</a>
+
+
+
+        </div>
+
+
+        <!-- Modal -->
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+
+                    <div class="modal-body">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+                        </div>
+
+
+                    </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
 
 
 
 
 
+        <div id="secondmodal"class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Mais Detalhes</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card" style="width: 18rem;">
+                           
+                            <div class="card-body">
+                                <br />
+                                <br />
+                                <img class="card-img" id="cardimg2" src="..." alt="Card image cap">
+                            </div>
+                        </div>
 
+                        <br />
+                        <br />
+                        <p id="l1">Modal body text goes here.</p>
+                        <p id="l2">Modal body text goes here.</p>
+                        <p id="l3">Modal body text goes here.</p>
+                        <p id="l4">Modal body text goes here.</p>
 
-    <nav class="navbar navbar-dark fixed-bottom bg-dark" role="navigation">
-        <div class="container">
-            <div class="navbar-text small">&copy;ITW2020 - Introdução às Tecnologias Web</div>
-            <div class="navbar-right navbar-text small d-sm-none d-md-block"><a href="http://www.ua.pt" title="Universidade de Aveiro">Universidade de Aveiro</a></div>
+                    </div>
+                    <div class="modal-footer">
+              
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
 
-    <script src="../Scripts/jquery-3.5.1.min.js"></script>
-    <script src="../Scripts/bootstrap.bundle.min.js"></script>
-    <script src="../Scripts/knockout-3.5.1.js"></script>
-    <script src="tmdbapi.js"></script>
+        <nav class="navbar navbar-dark fixed-bottom bg-dark" role="navigation">
+            <div class="container">
+                <div class="navbar-text small">&copy;ITW2020 - Introdução às Tecnologias Web</div>
+                <div class="navbar-right navbar-text small d-sm-none d-md-block"><a href="http://www.ua.pt" title="Universidade de Aveiro">Universidade de Aveiro</a></div>
+            </div>
+        </nav>
+
+        <script src="../Scripts/jquery-3.5.1.min.js"></script>
+        <script src="../Scripts/bootstrap.bundle.min.js"></script>
+        <script src="../Scripts/knockout-3.5.1.js"></script>
+        <script src="tmdbapi.js"></script>
 
 
 
 
-</body>
-</html>
+    </body>
+    </html>
