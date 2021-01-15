@@ -5,7 +5,7 @@ $().ready(function () {
         var youtubeuurl = 'https://www.youtube.com/watch?v='
         var urlimages = 'https://image.tmdb.org/t/p/w500/'
         var semimagemurl =' https://lh3.googleusercontent.com/proxy/npf9OZGh-pu0Aka815X_ibFeI9MJ1EqDovJlb4B3NGdhYytPLQ787WVqZVbi-4Ba9VD7waxE2gZAOawVj8WURrFQCk9Lp7smDMZjFbkb03JQqa2nFIHrXJf7HYrs_2A4IAuUvyqlgIJYiwzbpS7SIlToNGMzEVjSTRS1eb9ftakq_AgqhQsp'
-       
+        var video = "";
         valor=valor.replaceAll(" ","+")
 
         $.ajax({
@@ -54,6 +54,7 @@ $().ready(function () {
 
                                 console.log("isooooooo:  " + youtubeuurl + data.videos.results[0].key)
                                 var videolink = youtubeuurl + data.videos.results[0].key
+                                video = data.videos.results[0].key
                                 document.getElementById("vervideo").setAttribute("href", videolink)
                             }
                             else {
@@ -73,6 +74,39 @@ $().ready(function () {
 
 
 
+                    var $videoSrc;
+                    $('.video-btn').click(function () {
+                        $videoSrc = 'https://www.youtube.com/embed/' + video;
+                    });
+                    console.log($videoSrc);
+
+
+
+                    // when the modal is opened autoplay it  
+                    $('#myModal').on('shown.bs.modal', function (e) {
+
+                        // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+                        $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+                    })
+
+
+
+                    // stop playing the youtube video when I close the modal
+                    $('#myModal').on('hide.bs.modal', function (e) {
+                        // a poor man's stop video
+                        $("#video").attr('src', $videoSrc);
+                    })
+
+
+
+
+
+
+
+
+
+
+
 
                     $("#ver").click(function () {
                         var idtmbd = data.id;
@@ -81,7 +115,7 @@ $().ready(function () {
 
 
 
-                        $('#myModal').modal('show'); 
+                       // $('#myModal').modal('show'); 
 
                         var self = this;
                  
