@@ -11,7 +11,37 @@
                 </h4>
             </div>
         </div>
+
+        <img class="detailsPoster" data-bind="attr: { 'id': getTMDbSlug(name()) }" />
+
+        <!--<button  data-bind="attr: { 'id': getTMDbSlug(name()) + '-videoBtn', 'data-toggle': '#' + getTMDbSlug(name()) + '-modal' }" data-toggle="modal">View video</button>-->
+
+
+        <!-- Modal -->
+        <!--<div class="modal fade" data-bind="attr: { 'id': getTMDbSlug(name()) + '-modal' }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+
+                    <div class="modal-body">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>-->
+                        <!-- 16:9 aspect ratio -->
+                        <!--<div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" data-bind="attr: { 'id': getTMDbSlug(name()) + '-video' }" allowscriptaccess="always" allow="autoplay"></iframe>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>-->
+
         <hr class="border-bottom-muted" />
+
         <!-- ko if:name().length > 0 -->
 
         <h6>Description</h6>
@@ -23,7 +53,7 @@
         <div data-bind="foreach: actors">
             <div>
                 <a data-bind="attr: { href: '#ActorDetails/'+Id }">
-                    <i class="mr-1 fa fa-user-o"></i>
+                    <i class="icon mr-1 fa fa-user-o"></i>
                     <span data-bind="text: Name"></span>
                 </a>
             </div>
@@ -35,7 +65,7 @@
         <div data-bind="foreach: directors">
             <div>
                 <a data-bind="attr: { href: '#DirectorDetails/'+Id }">
-                    <i class="mr-1 fa fa-user-o"></i>
+                    <i class="icon mr-1 fa fa-user-o"></i>
                     <span data-bind="text: Name"></span>
                 </a>
             </div>
@@ -46,7 +76,7 @@
         <h6>Categories</h6>
         <div data-bind="foreach: categories">
             <div>
-                <i class="mr-1 fa fa-bookmark-o"></i>
+                <i class="icon mr-1 fa fa-bookmark-o"></i>
                 <span data-bind="text: Name + '', attr: { href: '#ActorDetails/'+Id }"></span>
             </div>
         </div>
@@ -56,7 +86,7 @@
         <h6>Countries</h6>
         <div data-bind="foreach: countries">
             <div>
-                <i class="mr-1 fa fa-flag-o"></i>
+                <i class="icon mr-1 fa fa-flag-o"></i>
                 <span data-bind="text: Name + '', attr: { href: '#ActorDetails/'+Id }"></span>
             </div>
         </div>

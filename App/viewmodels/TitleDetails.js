@@ -52,42 +52,13 @@
                 self.releaseYear(data.ReleaseYear);
                 self.type(data.Type);
 
+                var type = data.Type.Name.toLowerCase();
+
+                if (data.Type.Name == 'TV Show') type = 'tv';
+
+                tmdbImage(self.name(), type, false);
             });
             hideLoading();
-        };
-
-        self.getPoster = function (name) {
-
-            if (name == '(T)ERROR') return;
-
-            var url = getIMDbURL(name);
-            var slug = getIMDbSlug(name);
-
-            if (slug == '') return;
-
-            showLoading();
-
-            doCORSRequest({
-                method: 'GET',
-                url: url
-            }, function (result) {
-                hideLoading();
-                result = result.replace("imdb$" + slug + "(", '').slice(0, -1);
-                var data = JSON.parse(result);
-
-                var index = getIMDbIndex(data, name);
-
-                if (index != null) {
-
-                    var src = getIMDbImage(data, index);
-
-                    document.getElementById(slug).setAttribute('src', src);
-                }
-            });
-        };
-
-        self.getIMDbSlug = function (name) {
-            return getIMDbSlug(name);
         };
 
         self.enlargeImage = function (name) {
@@ -101,16 +72,6 @@
             image.classList.toggle('img-modal');
 
             console.log(image);
-        }
-
-
-        //--- start ....
-        var pg = getUrlParameter('id');
-        console.log(pg);
-        if (pg == undefined)
-            self.activate(1);
-        else {
-            self.activate(pg);
         }
     };
 

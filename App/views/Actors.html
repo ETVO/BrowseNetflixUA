@@ -25,9 +25,11 @@
             </thead>
             <tbody data-bind="foreach: records">
                 <tr class="t-row">
-                    <!--<td class="imgTd">
-                    <img class="imagePoster img-modal" data-bind="attr: { src: $parent.getPoster(Name), 'id': $parent.getIMDbSlug(Name) }, event: { click: $parent.enlargeImage(Name) }" />
-                </td>-->
+                    <td class="imgTd">
+                        <a data-bind="attr: { href:'#TitleDetails/'+Id }">
+                            <img class="imagePoster" data-bind="attr: { src: $parent.getPoster(Name), 'id': getTMDbSlug(Name) }" />
+                        </a>
+                    </td>
                     <td scope="row" class="">
                         <h4 data-bind="text: Name"></h4>
                     </td>
