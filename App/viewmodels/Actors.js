@@ -86,52 +86,15 @@ define(['durandal/app'], function (app) {
             hideLoading();
         };
 
+
         self.getPoster = function (name) {
 
             if (name == '(T)ERROR') return;
 
-            var url = getIMDbURL(name);
-            var slug = getIMDbSlug(name);
+            type = 'person';
 
-            if (slug == '') return;
-
-            showLoading();
-
-            doCORSRequest({
-                method: 'GET',
-                url: url
-            }, function (result) {
-                hideLoading();
-                result = result.replace("imdb$" + slug + "(", '').slice(0, -1);
-                var data = JSON.parse(result);
-
-                var index = getIMDbIndex(data, name);
-
-                if (index != null) {
-
-                        var src = getIMDbImage(data, index);
-
-                        document.getElementById(slug).setAttribute('src', src);
-                }
-            });
+            tmdbImage(name, type, false);
         };
-
-        self.getIMDbSlug = function (name) {
-            return getIMDbSlug(name);
-        };
-
-        self.enlargeImage = function (name) {
-
-            var id = getIMDbSlug(name);
-
-            if (id == '') return;
-
-            var image = document.getElementById(id);
-
-            image.classList.toggle('img-modal');
-
-            console.log(image);
-        }
 
 
         // start ....

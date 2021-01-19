@@ -1,22 +1,28 @@
 ﻿<link rel="stylesheet" href="app/style/titles.css" />
 
 <section>
-    <div class="container details">
+    <div class="container">
         <div class="pt-4 pb-1 mb-3">
             <h2 data-bind="text:displayName"></h2>
-            <h1 data-bind="text: name()"></h1>
         </div>
-        <!-- ko if:name().length > 0 -->
 
-        <img class="detailsPoster" data-bind="attr: { 'id': getTMDbSlug(name()) }" />
+        <form class="form-inline my-2 my-lg-0 d-none d-lg-block search">
+            <div class="form-group btn-group-sm bg-dark">
+                <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search" data-bind="value: query">
+                <button data-bind="click: getTitles" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </form>
 
         <hr class="border-bottom-muted" />
 
-        <h6>Titles</h6>
+        <!-- ko if:records().length > 0 -->
+
+        <!--<div class="clearfix"></div>-->
+
         <table class="table text-light">
             <thead class="thead">
                 <tr>
-                    <!--<th scope="col">Poster</th>-->
+                    <th scope="col">Poster</th>
                     <th scope="col">Title</th>
                     <th class="d-none d-lg-block" scope="col">Description</th>
                     <th scope="col">Type</th>
@@ -25,9 +31,11 @@
             </thead>
             <tbody data-bind="foreach: records">
                 <tr class="t-row">
-                    <!--<td class="imgTd">
-                    <img class="imagePoster img-modal" data-bind="attr: { src: $parent.getPoster(Name), 'id': $parent.getIMDbSlug(Name) }, event: { click: $parent.enlargeImage(Name) }" />
-                </td>-->
+                    <td class="imgTd">
+                        <a data-bind="attr: { href:'#TitleDetails/'+Id }">
+                            <img class="imagePoster" data-bind="attr: { src: $parent.getPoster(Name, TypeName), 'id': getTMDbSlug(Name) }" />
+                        </a>
+                    </td>
                     <td scope="row" class="">
                         <h4 data-bind="text: Name"></h4>
                         <span data-bind="text: ReleaseYear"></span>
@@ -49,12 +57,20 @@
             </tbody>
         </table>
 
+        <!-- /ko -->
         <!-- ko ifnot:records().length > 0 -->
-        <span>No title was found</span>
+        <!-- ko ifnot:first() -->
+        <h3 data-bind="text:notFound()[0]"></h3>
+        <!-- ko ifnot:error != '' -->
+        <p>
+            <span data-bind="text:notFound()[1]"></span>
+            <br />
+            <span data-bind="text:error"></span>
+        </p>
+        <!-- /ko -->
+        <!-- /ko -->
         <!-- /ko -->
 
-        <hr class="border-bottom-muted" />
 
-        <!-- /ko -->
     </div>
 </section>
