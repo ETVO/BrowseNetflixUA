@@ -24,7 +24,7 @@ $().ready(function () {
 
             var i;
 
-            for (i = 0; i < 14; i++) {
+            for (i = 0; i < 17; i++) {
              
                 
                 document.getElementById("result" + i + "img").setAttribute("src",imgurl+data.results[i].poster_path)
@@ -84,7 +84,7 @@ $().ready(function () {
 
             var a
 
-            for (a = 0; a < 14; a++) {
+            for (a = 0; a < 17; a++) {
 
                 $(".p" + a).html("RELEASEDATE:"+data.results[a].release_date)
 
@@ -99,7 +99,7 @@ $().ready(function () {
                 self.imgresults (imgurl + data.results[a].poster_path)
                 //console.log("imagem:"+imgurl + data.results[a].poster_path)
 
-                console.log(self.imgresults()) // Array of imgUrls cam be used to do someshit ahah 
+                console.log(self.imgresults()) // Array of imgUrls cam be used to do some shit ahah 
             }
        
         },
@@ -109,52 +109,13 @@ $().ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     $('#carousel-example').on('slide.bs.carousel', function (e) {
         /*
             CC 2.0 License Iatek LLC 2018 - Attribution required
         */
         var $e = $(e.relatedTarget);
         var idx = $e.index();
-        var itemsPerSlide = 4;
+        var itemsPerSlide = 1;
         var totalItems = $('.carousel-item').length;
 
         if (idx >= totalItems - (itemsPerSlide - 1)) {
@@ -170,20 +131,6 @@ $().ready(function () {
             }
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
