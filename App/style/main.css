@@ -124,13 +124,14 @@ a:focus {
 }
 
 .btn-outline-primary {
-    color: #ad020a;
+    color: #fff;
     border: 1px solid #ad020a;
 }
 
-.btn-outline-primary:hover,
 .btn-outline-primary:active,
+.btn-outline-primary:hover,
 .btn-outline-primary:focus {
-    background-color: #ad020a;
-    border: 1px solid #ad020a;
+    background-color: #ad020a !important;
+    border: 1px solid #ad020a !important;
+    outline: none !important;
 }
