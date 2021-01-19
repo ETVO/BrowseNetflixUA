@@ -46,8 +46,10 @@
         <h6>Categories</h6>
         <div data-bind="foreach: categories">
             <div>
-                <i class="mr-1 fa fa-bookmark-o"></i>
-                <span data-bind="text: Name + '', attr: { href: '#ActorDetails/'+Id }"></span>
+                <a data-bind="attr: { href: '#CategoryDetails/'+Id }">
+                    <i class="mr-1 fa fa-bookmark-o"></i>
+                    <span data-bind="text: Name"></span>
+                </a>
             </div>
         </div>
 
@@ -56,8 +58,10 @@
         <h6>Countries</h6>
         <div data-bind="foreach: countries">
             <div>
-                <i class="mr-1 fa fa-flag-o"></i>
-                <span data-bind="text: Name + '', attr: { href: '#ActorDetails/'+Id }"></span>
+                <a data-bind="attr: { href: '#CountryDetails/'+Id }">
+                    <i class="mr-1 fa fa-flag-o"></i>
+                    <span data-bind="text: Name"></span>
+                </a>
             </div>
         </div>
 

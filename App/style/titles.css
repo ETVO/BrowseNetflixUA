@@ -1,0 +1,18 @@
+﻿.imagePoster {
+    height: 70px !important;
+    cursor: pointer;
+}
+
+.t-row {
+    position: relative;
+}
+
+.imgTd {
+    position: relative;
+}
+
+.img-modal {
+    position: absolute;
+    top: 0;
+    height: 300px !important;
+}

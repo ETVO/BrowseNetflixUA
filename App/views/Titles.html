@@ -1,6 +1,8 @@
-﻿<section>
+﻿<link rel="stylesheet" href="app/style/titles.css" />
+
+<section>
     <div class="container">
-        <div class="border-bottom pt-4 pb-2 mb-3">
+        <div class="pt-4 pb-1 mb-3" style="border-bottom: 1px solid #555">
             <h2 data-bind="text:displayName"></h2>
         </div>
 
@@ -10,30 +12,37 @@
         <!--<div class="clearfix"></div>-->
 
 
-        <table class="table table-striped">
-            <thead class="thead-dark">
+        <table class="table text-light">
+            <thead class="thead">
                 <tr>
+                    <!--<th scope="col">Poster</th>-->
                     <th scope="col">Title</th>
-                    <!--<th scope="col">Released</th>-->
+                    <th class="d-none d-lg-block" scope="col">Description</th>
                     <th scope="col">Type</th>
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
             <tbody data-bind="foreach: records">
-                <tr>
-                    <td>
+                <tr class="t-row">
+                    <!--<td class="imgTd">
+                        <img class="imagePoster img-modal" data-bind="attr: { src: $parent.getPoster(Name), 'id': $parent.getIMDbSlug(Name) }, event: { click: $parent.enlargeImage(Name) }" />
+                    </td>-->
+                    <td scope="row" class="">
                         <h4 data-bind="text: Name"></h4>
                         <span data-bind="text: ReleaseYear"></span>
                     </td>
-                    <!--<td data-bind="text:ReleaseYear"></td>-->
+                    <td class="d-none d-md-block" data-bind="text:Description" id="desc"></td>
                     <td data-bind="text:TypeName"></td>
-                    <td class="text-right">
-                        <a class="btn  btn-sm" data-bind="attr: { href:'#TitleDetails/'+Id }">
+                    <td class="text-right text-white">
+                        <!--<a class="btn  btn-sm" data-bind="attr: { href:'#TitleDetails/'+Id }">
                             <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
                         </a>
                         <button class="btn btn-sm">
                             <i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_'+Id }" title="Selecione para adicionar aos favoritos"></i>
-                        </button>
+                        </button>-->
+                        <a data-bind="attr: { href:'#TitleDetails/'+Id }" class="btn btn-link">
+                            <i class="fa fa-info" aria-hidden="true"></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -57,9 +66,9 @@
 </section>
 
 <script type="text/html" id="pagination-template">
-    <div class="col-12 pages">
+    <div class="col-12 pages bg-dark text-light">
         <div class="row">
-            <p class="mr-auto pt-2">
+            <p class="mr-auto pt-2 pages-stats">
                 <span class="a" data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
                 <span class="a" data-bind="html: 'Titles: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
             </p>
@@ -67,7 +76,7 @@
                 <ul class="pagination">
                     <!-- ko if: currentPage() > 3 && totalPages() > 10 -->
                     <li class="page-item"><a class="page-link" title="First Page" href="#Titles/1">⇤</a></li>
-                    <li class="page-item"><a class="page-link" title="Previous Page" data-bind="attr: {href:'#Titles/' + previousPage(),  rel:'prev'}">Previous</a></li>
+                    <li class="page-item"><a class="page-link" title="Previous Page" data-bind="attr: {href:'#Titles/' + previousPage(),  rel:'prev'}">←</a></li>
                     <!--<li class="page-item disabled"><a class="page-link">…</a></li>-->
                     <!-- /ko -->
                     <!-- ko foreach: pageArray()-->
@@ -75,12 +84,12 @@
                     <li class="active page-item"><a class="page-link" data-bind="attr: {title:'Current Page '+$data }, text:$data"></a></li>
                     <!-- /ko -->
                     <!-- ko if:$data != $parent.currentPage() -->
-                    <li class="page-item"><a class="page-link" data-bind="attr: {href:'#Titles/' + $data, title:'Goto Page '+$data }, text:$data"></a></li>
+                    <li class="page-item"><a class="page-link" data-bind="attr: {href:'#Titles/' + $data, title:'Page '+$data }, text:$data"></a></li>
                     <!-- /ko -->
                     <!-- /ko -->
                     <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
                     <!--<li class="page-item disabled"><a class="page-link">…</a></li>-->
-                    <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: {href:'#Titles/' + nextPage(), rel:'next' }">Next</a></li>
+                    <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: {href:'#Titles/' + nextPage(), rel:'next' }">→</a></li>
                     <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: {href:'#Titles/' + totalPages() }">⇥</a></li>
                     <!-- /ko -->
                 </ul>

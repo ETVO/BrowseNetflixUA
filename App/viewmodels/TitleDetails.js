@@ -1,13 +1,14 @@
 ﻿define(['durandal/app'], function (app) {
     var vm = function () {
         console.log('ViewModel initiated...');
-        //---Variáveis locais
+
         var self = this;
         self.baseUri = ko.observable('http://192.168.160.58/netflix/api/titles/');
-        self.displayName = 'Detalhes do Filme ';
+
+        self.displayName = 'Title Details';
         self.error = ko.observable('');
         self.passingMessage = ko.observable('');
-        //--- Data Record
+
         self.actors = ko.observableArray('');
         self.categories = ko.observableArray('');
         self.countries = ko.observableArray('');
@@ -20,12 +21,24 @@
         self.rating = ko.observable('');
         self.releaseYear = ko.observable('');
         self.type = ko.observable('');
-        //--- Page Events
+
+        self.getDateAdded = () => {
+            var d = new Date(self.dateAdded());
+
+            var day = d.getDay();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+
+            return day.pad(2) + '/' + month.pad(2) + '/' + year.pad(4);
+        }
+
+
         self.activate = function (id) {
             console.log('CALL: getTitle...');
             var composedUri = self.baseUri() + id;
             ajaxHelper(composedUri, 'GET').done(function (data) {
-                console.log(data);
+                //console.log(data);
+
                 self.actors(data.Actors);
                 self.categories(data.Categories);
                 self.countries(data.Countries);
@@ -38,40 +51,59 @@
                 self.rating(data.Rating);
                 self.releaseYear(data.ReleaseYear);
                 self.type(data.Type);
+
             });
+            hideLoading();
         };
-        //--- Internal functions
-        function ajaxHelper(uri, method, data) {
-            self.error(''); // Clear error message
-            return $.ajax({
-                type: method,
-                url: uri,
-                dataType: 'json',
-                contentType: 'application/json',
-                data: data ? JSON.stringify(data) : null,
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("AJAX Call[" + uri + "] Fail...");
-                    self.error(errorThrown);
+
+        self.getPoster = function (name) {
+
+            if (name == '(T)ERROR') return;
+
+            var url = getIMDbURL(name);
+            var slug = getIMDbSlug(name);
+
+            if (slug == '') return;
+
+            showLoading();
+
+            doCORSRequest({
+                method: 'GET',
+                url: url
+            }, function (result) {
+                hideLoading();
+                result = result.replace("imdb$" + slug + "(", '').slice(0, -1);
+                var data = JSON.parse(result);
+
+                var index = getIMDbIndex(data, name);
+
+                if (index != null) {
+
+                    var src = getIMDbImage(data, index);
+
+                    document.getElementById(slug).setAttribute('src', src);
                 }
             });
+        };
 
+        self.getIMDbSlug = function (name) {
+            return getIMDbSlug(name);
+        };
+
+        self.enlargeImage = function (name) {
+
+            var id = getIMDbSlug(name);
+
+            if (id == '') return;
+
+            var image = document.getElementById(id);
+
+            image.classList.toggle('img-modal');
+
+            console.log(image);
         }
-       
 
-        function getUrlParameter(sParam) {
-            var sPageURL = window.location.search.substring(1),
-                sURLVariables = sPageURL.split('&'),
-                sParameterName,
-                i;
 
-            for (i = 0; i < sURLVariables.length; i++) {
-                sParameterName = sURLVariables[i].split('=');
-
-                if (sParameterName[0] === sParam) {
-                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-                }
-            }
-        };
         //--- start ....
         var pg = getUrlParameter('id');
         console.log(pg);

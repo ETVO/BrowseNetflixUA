@@ -1,9 +1,7 @@
-﻿const PAGE_SIZE = 20;
-const IMDB_URI = "https://sg.media-imdb.com/suggests/";
-
+﻿
 define(['durandal/app'], function (app) {
     var vm = function () {
-        
+
         // Variáveis locais
         var self = this;
         self.baseUri = ko.observable('http://192.168.160.58/netflix/api/Titles');
@@ -12,8 +10,6 @@ define(['durandal/app'], function (app) {
         self.error = ko.observable('');
         self.notFound = ko.observableArray(['No title was found.', 'More details:']);
         self.passingMessage = ko.observable('');
-
-        self.detailsHref = ko.observable('#TitleDetails/');
 
         self.records = ko.observableArray([]);
 
@@ -42,9 +38,17 @@ define(['durandal/app'], function (app) {
 
         self.totalPages = ko.observable(0);
 
+        function isHidden(el) {
+            var style = window.getComputedStyle(el);
+            return (style.display === 'none')
+        };
+
         self.pageArray = function () {
             var list = [];
             var showNumber = 6;
+            if (isHidden(document.getElementById('desc'))) {
+                showNumber = 3;
+            }
             var size = Math.min(self.totalPages(), showNumber);
             var step;
             if (size < showNumber || self.currentPage() === 1)
@@ -61,10 +65,13 @@ define(['durandal/app'], function (app) {
 
         // Page Events
         self.activate = function (id) {
-            console.log('CALL: getTitle...');
+            showLoading();
+
             var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pageSize();
             ajaxHelper(composedUri, 'GET').done(function (data) {
-                console.log(data);
+                //console.log(data);
+
+                hideLoading();
 
                 self.records(data.Titles);
                 self.currentPage(data.CurrentPage);
@@ -76,49 +83,61 @@ define(['durandal/app'], function (app) {
                 //self.SetFavourites();
 
             });
+            hideLoading();
         };
 
-        // Internal functions
-        function ajaxHelper(uri, method, data) {
-            self.error(''); // Clear error message
-            return $.ajax({
-                type: method,
-                url: uri,
-                dataType: 'json',
-                contentType: 'application/json',
-                data: data ? JSON.stringify(data) : null,
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("AJAX Call[" + uri + "] Fail...");
-                   
-                    self.error(errorThrown);
+        self.getPoster = function (name) {
+
+            if (name == '(T)ERROR') return;
+
+            var url = getIMDbURL(name);
+            var slug = getIMDbSlug(name);
+
+            if (slug == '') return;
+
+            showLoading();
+
+            doCORSRequest({
+                method: 'GET',
+                url: url
+            }, function (result) {
+                hideLoading();
+                result = result.replace("imdb$" + slug + "(", '').slice(0, -1);
+                var data = JSON.parse(result);
+
+                var index = getIMDbIndex(data, name);
+
+                if (index != null) {
+
+                        var src = getIMDbImage(data, index);
+
+                        document.getElementById(slug).setAttribute('src', src);
                 }
             });
-
         };
-       
-        function getUrlParameter(sParam) {
-            var sPageURL = window.location.search.substring(1),
-                sURLVariables = sPageURL.split('&'),
-                sParameterName,
-                i;
 
-            for (i = 0; i < sURLVariables.length; i++) {
-                sParameterName = sURLVariables[i].split('=');
-
-                if (sParameterName[0] === sParam) {
-                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
-                }
-            }
+        self.getIMDbSlug = function (name) {
+            return getIMDbSlug(name);
         };
+
+        self.enlargeImage = function (name) {
+
+            var id = getIMDbSlug(name);
+
+            if (id == '') return;
+
+            var image = document.getElementById(id);
+
+            image.classList.toggle('img-modal');
+
+            console.log(image);
+        }
 
         // start ....
         var pg = getUrlParameter('page');
-        console.log(pg);
+        console.log("pg", pg);
         if (pg == undefined)
             self.activate(1);
-        else {
-            self.activate(pg);
-        }
     };
     return vm
 });

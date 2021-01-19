@@ -17,9 +17,31 @@
 
 <div class="page-host container" data-bind="router"></div>
 
-<nav class="navbar fixed-bottom navbar-dark bg-dark" role="navigation">
-    <div class="container">
-        <div class="navbar-text small">Netflix ITW - Version 1.0</div>
-        <div class="navbar-right navbar-text small d-none d-lg-block"><a href="http://www.ua.pt" title="Universidade de Aveiro">Universidade de Aveiro</a></div>
+<!-- Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body bg-dark text-light text-center">
+                <h5 class="modal-title" id="loadingModalLabel">
+                    <img src="./images/netflixIcon.png" height="30" /> Loading...
+                </h5>
+                <br />
+                <i class="fa fa-spin fa-3x fa-refresh"></i>
+            </div>
+        </div>
     </div>
-</nav>
+</div>
+
+<footer class="navbar fixed-bottom navbar-dark" role="navigation">
+    <div class="container">
+        <div class="navbar-text small">
+            <h6 class="m-0">Browse Netflix UA</h6>
+            Airton Moreira & Estevão Rolim
+        </div>
+        <div class="navbar-right navbar-text small d-none d-md-block text-right">
+            <a href="http://www.ua.pt" title="Universidade de Aveiro">Universidade de Aveiro</a>
+            <br />
+            <a href="https://github.com/ETVO/BrowseNetflixUA" title="Repositório GitHub">BrowseNetflixUA</a>
+        </div>
+    </div>
+</footer>

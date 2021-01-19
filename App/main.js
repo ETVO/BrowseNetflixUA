@@ -1,10 +1,12 @@
-﻿requirejs.config({
+﻿const PAGE_SIZE = 20;
+
+requirejs.config({
     paths: {
-        'text': '../Scripts/text',
-        'durandal': '../Scripts/durandal',
-        'plugins': '../Scripts/durandal/plugins',
-        'transitions': '../Scripts/durandal/transitions',
-        'bootstrap': '../Scripts/bootstrap.bundle'
+        'text': '../vendors/Scripts/text',
+        'durandal': '../vendors/Scripts/durandal',
+        'plugins': '../vendors/Scripts/durandal/plugins',
+        'transitions': '../vendors/Scripts/durandal/transitions',
+        'bootstrap': '../vendors/Scripts/bootstrap.bundle'
     },
     "shim": {
         "bootstrap": ["jquery"]
@@ -36,3 +38,106 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'bootstrap'],
         app.setRoot('viewmodels/shell');
     });
 });
+
+
+function doCORSRequest(options, getResult) {
+    var x = new XMLHttpRequest();
+    x.open(options.method, cors_api_url + options.url);
+    x.onload = x.onerror = function () {
+        getResult((x.responseText || ''));
+    };
+    if (/^POST/i.test(options.method)) {
+        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
+    x.send(options.data);
+}
+
+
+// Specific functions to access the IMDb API data
+const imdb_api_url = 'https://sg.media-imdb.com/suggests/';
+const imdb_url = 'https://www.imdb.com/';
+var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+function getIMDbURL(name) {
+    name = getIMDbSlug(name);
+    return imdb_api_url + name[0] + "/" + name + ".json";
+}
+function getIMDbSlug(title) {
+    return title.trim().normalize("NFKD").replaceAll(/[^\-\w\s]/gi, '').trim().replaceAll(' ', '-').toLowerCase();
+}
+
+function ajaxHelper(uri, method, data) {
+    return $.ajax({
+        type: method,
+        url: uri,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: data ? JSON.stringify(data) : null,
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log("AJAX Call[" + uri + "] Fail...");
+        }
+    });
+};
+
+function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function getIMDbIndex(data, name) {
+    try {
+
+        if (data.d.length == 0) return;
+
+    } catch (err) {
+        console.error("getIMDbImage ERROR: ", err);
+        return;
+    }
+
+
+    if (data.d.length > 1 && name != null) {
+
+        index = data.d.findIndex(i => i.l.toLowerCase() === name.toLowerCase());
+
+        if (index == -1)
+            return;
+
+    }
+    else
+        index = 0;
+
+    return index;
+}
+
+function getIMDbImage(data, index) {
+    return data.d[index].i[0];
+}
+
+function showLoading() {
+    console.log('show   ');
+    $('#loadingModal').modal({
+        backdrop: 'static',
+        keyboard: false
+    });
+}
+function hideLoading() {
+    $('#loadingModal').on('shown.bs.modal', function (e) {
+        $("#loadingModal").modal('hide');
+    });
+    
+}
+
+Number.prototype.pad = function (size) {
+    var s = String(this);
+    while (s.length < (size || 2)) { s = "0" + s; }
+    return s;
+}

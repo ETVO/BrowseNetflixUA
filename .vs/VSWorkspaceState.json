@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\App"
+    "\\App",
+    "\\App\\viewmodels",
+    "\\App\\views"
   ],
+  "SelectedNode": "\\App\\views\\shell.html",
   "PreviewInSolutionExplorer": false
 }

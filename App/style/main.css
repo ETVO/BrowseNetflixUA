@@ -1,3 +1,114 @@
 ﻿html {
     overflow-y: scroll;
 }
+
+::selection {
+    background: #ad020a;
+}
+
+.page-host {
+    margin-top: 60px;
+    margin-bottom: 100px;
+}
+
+.fa-cog {
+    color: white;
+}
+
+.bg-dark {
+    background-color: #222 !important;
+}
+
+.page-link {
+    border: none;
+    color: #fff;
+    background-color: #333;
+}
+
+nav {
+    border-bottom: 1px solid #282828 !important;
+    background: linear-gradient(#202020, #222) !important;
+}
+
+footer {
+    border-top: 1px solid #282828 !important;
+    background: linear-gradient(#222, #202020) !important;
+}
+
+footer .navbar-text {
+    color: #ccc !important;
+}
+
+footer a:active,
+footer a:hover,
+footer a:focus {
+    text-decoration: underline;
+}
+
+.page-link:hover,
+.page-link:active,
+.page-link:focus {
+    color: #fff;
+    background-color: #282828;
+
+}
+
+.page-item.active .page-link {
+    /*background-color: #E50813;*/
+    background-color: #ad020a;
+}
+
+.table .btn-link {
+    color: #fff !important;
+}
+
+.table .btn-link:hover,
+.table .btn-link:active,
+.table .btn-link:focus {
+    color: #E50813 !important;
+}
+
+.table thead th {
+    text-transform: uppercase;
+    font-weight: lighter;
+    border-bottom: none;
+    background: #282828;
+}
+
+.table th,
+.table td {
+    border-top: 1px solid #555;
+}
+
+.pages-stats {
+    color: #999;
+}
+
+
+
+.border-bottom-muted {
+    border: none;
+    border-bottom: 1px solid #333;
+}
+
+.details i.fa {
+    color: #666;
+}
+
+a {
+    color: #fff;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: #E50813;
+    /*text-decoration: underline;*/
+}
+
+.details h6 {
+    font-size: 16px;
+    font-weight: lighter;
+    text-transform: uppercase;
+    color: #666;
+}
