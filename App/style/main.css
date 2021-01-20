@@ -23,17 +23,7 @@
     border: none;
     color: #fff;
     background-color: #333;
-}
-
-nav {
-    border-bottom: 1px solid #282828 !important;
-    background: linear-gradient(#202020, #222) !important;
-}
-
-footer {
-    border-top: 1px solid #282828 !important;
-    background: linear-gradient(#222, #202020) !important;
-}
+}c
 
 footer .navbar-text {
     color: #ccc !important;
@@ -134,4 +124,19 @@ a:focus {
     background-color: #ad020a !important;
     border: 1px solid #ad020a !important;
     outline: none !important;
+}
+
+.carousel-item > img {
+    filter: blur(8px);
+}
+
+.carousel-item:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
 }

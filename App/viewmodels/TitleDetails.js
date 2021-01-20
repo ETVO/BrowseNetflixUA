@@ -23,6 +23,8 @@
         self.type = ko.observable('');
 
         self.getDateAdded = () => {
+            console.log('date added', self.dateAdded());
+            if (self.dateAdded() == null) return '';
             var d = new Date(self.dateAdded());
 
             var day = d.getDay();
