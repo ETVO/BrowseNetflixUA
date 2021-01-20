@@ -15,40 +15,39 @@
         <img class="detailsPoster" data-bind="attr: { 'id': getTMDbSlug(name()) }" />
 
         <!--<button  data-bind="attr: { 'id': getTMDbSlug(name()) + '-videoBtn', 'data-toggle': '#' + getTMDbSlug(name()) + '-modal' }" data-toggle="modal">View video</button>-->
-
-
         <!-- Modal -->
         <!--<div class="modal fade" data-bind="attr: { 'id': getTMDbSlug(name()) + '-modal' }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
 
 
-                    <div class="modal-body">
+            <div class="modal-body">
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>-->
-                        <!-- 16:9 aspect ratio -->
-                        <!--<div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="" data-bind="attr: { 'id': getTMDbSlug(name()) + '-video' }" allowscriptaccess="always" allow="autoplay"></iframe>
-                        </div>
-
-
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>-->
+        <!-- 16:9 aspect ratio -->
+        <!--<div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="" data-bind="attr: { 'id': getTMDbSlug(name()) + '-video' }" allowscriptaccess="always" allow="autoplay"></iframe>
                     </div>
 
+
                 </div>
+
             </div>
-        </div>-->
+        </div>
+    </div>-->
 
         <hr class="border-bottom-muted" />
 
         <!-- ko if:name().length > 0 -->
-
+        <!-- ko if:description().length > 0 -->
         <h6>Description</h6>
         <p data-bind="text: description()"></p>
 
         <hr class="border-bottom-muted" />
-
+        <!-- /ko -->
+        <!-- ko if:actors().length > 0 -->
         <h6>Actors</h6>
         <div data-bind="foreach: actors">
             <div>
@@ -60,7 +59,8 @@
         </div>
 
         <hr class="border-bottom-muted" />
-
+        <!-- /ko -->
+        <!-- ko if:directors().length > 0 -->
         <h6>Directors</h6>
         <div data-bind="foreach: directors">
             <div>
@@ -72,7 +72,8 @@
         </div>
 
         <hr class="border-bottom-muted" />
-
+        <!-- /ko -->
+        <!-- ko if:categories().length > 0 -->
         <h6>Categories</h6>
         <div data-bind="foreach: categories">
             <div>
@@ -82,7 +83,8 @@
         </div>
 
         <hr class="border-bottom-muted" />
-
+        <!-- /ko -->
+        <!-- ko if:countries().length > 0 -->
         <h6>Countries</h6>
         <div data-bind="foreach: countries">
             <div>
@@ -92,20 +94,26 @@
         </div>
 
         <hr class="border-bottom-muted" />
+        <!-- /ko -->
+        <!-- ko if:dateAdded() != null -->
 
         <h6>Added on</h6>
         <span data-bind="text: getDateAdded()"></span>
 
         <hr class="border-bottom-muted" />
+        <!-- /ko -->
+        <!-- ko if:duration() != null -->
 
         <h6>Duration</h6>
-        <span data-bind="text: duration"></span>
+        <span data-bind="text: duration()"></span>
 
         <hr class="border-bottom-muted" />
+        <!-- /ko -->
+        <!-- ko if:rating().Code != null -->
 
         <h6>Rating</h6>
         <span data-bind="text: rating().Code"></span>
-
+        <!-- /ko -->
         <!-- /ko -->
     </div>
 </section>

@@ -4,7 +4,7 @@ define(['durandal/app'], function (app) {
 
         // Variáveis locais
         var self = this;
-        self.baseUri = ko.observable('http://192.168.160.58/netflix/api/Search/Movies?name=');
+        self.baseUri = ko.observable('http://192.168.160.58/netflix/api/Search/Titles?name=');
 
         self.displayName = 'Search Titles';
         self.error = ko.observable('');
