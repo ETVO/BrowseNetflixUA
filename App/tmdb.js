@@ -5,12 +5,16 @@ const api_img_url = 'https://image.tmdb.org/t/p/w500/';
 const youtube_url = 'https://www.youtube.com/embed/';
 const youtube_url_params = '?autoplay=1&amp;modestbranding=1&amp;showinfo=0';
 
+
 function tmdbImage(name, type, getVideo) {
 
     var query = getTMDbSlug(name);
-
+    if(type!="movie" && type!="person"){
+        type="tv"
+    }
     url = api_search_url + type;
-    specific_url = api_movie_url + type + '/';
+    specific_url = api_movie_url+type;
+    
     
     $.ajax({
         url: url,
@@ -20,10 +24,10 @@ function tmdbImage(name, type, getVideo) {
             query: query
         },
         success: function (data) {
-            //console.log("TMDb request...\nquery: ", query);
+          
 
             if (data.results.length > 0) {
-                //console.log("TMDb data: ", data);
+                //console.log("TMDb data: ", url);
 
                 if(type == 'movie')
                     var index = data.results.findIndex(result => result.original_title.toLowerCase() === name.toLowerCase());
@@ -53,38 +57,26 @@ function tmdbImage(name, type, getVideo) {
                     $('#' + query + '-image-popup').attr('src', img);
                 });
 
-                if (getVideo) {
+                
                     $.ajax({
                         url: specific_url + tmbd_id + "?api_key=" + api_key + "&append_to_response=videos",
 
                         success: function (data) {
-                            //console.log("TMDb specific data: ", data);
+                            //console.log("TMDb specific data: ",  specific_url + tmbd_id + "?api_key=" + api_key + "&append_to_response=videos");
 
                             if (data.videos.results.length > 0) {
                                 //console.log("TMDb YouTube URL:  " + youtube_url + data.videos.results[0].key);
-                                var video_src = youtube_url + data.videos.results[0].key;
-                                var video_src = youtube_url + data.videos.results[0].key;
+                                var video_src= youtube_url + data.videos.results[0].key;
                                 var video_type = data.videos.results[0].type;
-                                document.getElementById(query + '-videoBtn').innerText = video_type;
-                                $('#' + query + '-videoBtn').click(function () {
-                                    $('#' + query + '-video').attr('src', youtube_url + video_src + youtube_url_params);
-                                });
-
-                                $('#' + query + '-modal').on('shown.bs.modal', function (e) {
-                                    $('#' + query + '-video').attr('src', youtube_url + video_src + youtube_url_params);
-                                });
-
-                                $('#' + query + '-modal').on('shown.bs.modal', function (e) {
-                                    $('#' + query + '-video').attr('src', youtube_url + video_src + youtube_url_params);
-                                });
                             }
 
                         },
                         error: function (err) {
-                            //console.log("TMDb specific error: ", err);
+                            console.clear()
                         }
                     });
-                }
+                
+
 
             }
             else {
@@ -97,9 +89,12 @@ function tmdbImage(name, type, getVideo) {
 
         },
         error: function (err) {
-            //console.log("TMDb error: ", err);
+            console.clear()
         }
+  
     });
+    
+  
 }
 
 function getTMDbSlug(name) {
@@ -107,10 +102,11 @@ function getTMDbSlug(name) {
 }
 
 
+
 function tmdbBackdrop(name, getVideo) {
 
     var query = getTMDbSlug(name);
-
+    
     url = api_search_url + type;
     specific_url = api_movie_url + type + '/';
 
@@ -152,52 +148,21 @@ function tmdbBackdrop(name, getVideo) {
                 $('#' + query + '-image-modal').on('shown.bs.modal', function (e) {
                     $('#' + query + '-image-popup').attr('src', img);
                 });
-
-                if (getVideo) {
-                    $.ajax({
-                        url: specific_url + tmbd_id + "?api_key=" + api_key + "&append_to_response=videos",
-
-                        success: function (data) {
-                            //console.log("TMDb specific data: ", data);
-
-                            if (data.videos.results.length > 0) {
-                                //console.log("TMDb YouTube URL:  " + youtube_url + data.videos.results[0].key);
-                                var video_src = youtube_url + data.videos.results[0].key;
-                                var video_src = youtube_url + data.videos.results[0].key;
-                                var video_type = data.videos.results[0].type;
-                                document.getElementById(query + '-videoBtn').innerText = video_type;
-                                $('#' + query + '-videoBtn').click(function () {
-                                    $('#' + query + '-video').attr('src', youtube_url + video_src + youtube_url_params);
-                                });
-
-                                $('#' + query + '-modal').on('shown.bs.modal', function (e) {
-                                    $('#' + query + '-video').attr('src', youtube_url + video_src + youtube_url_params);
-                                });
-
-                                $('#' + query + '-modal').on('shown.bs.modal', function (e) {
-                                    $('#' + query + '-video').attr('src', youtube_url + video_src + youtube_url_params);
-                                });
-                            }
-
-                        },
-                        error: function (err) {
-                            //console.log("TMDb specific error: ", err);
-                        }
-                    });
-                }
+               
 
             }
-            else {
-                //console.log("TMDb no data for ", query);
-                document.getElementById(query).style.display = 'none';
-            }
+           
 
+            
+            
 
 
 
         },
         error: function (err) {
-            //console.log("TMDb error: ", err);
+            console.clear()
         }
     });
+    
+    
 }

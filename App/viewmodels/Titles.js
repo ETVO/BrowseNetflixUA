@@ -94,8 +94,9 @@ define(['durandal/app'], function (app) {
 
             if (typeName == 'TV Show') type = 'tv';
 
-            tmdbImage(name, type, false);
+           tmdbImage(name, type, true);
         };
+        
 
         // start ....
         var pg = getUrlParameter('page');
@@ -103,5 +104,7 @@ define(['durandal/app'], function (app) {
         if (pg == undefined)
             self.activate(1);
     };
+
+    
     return vm
 });
