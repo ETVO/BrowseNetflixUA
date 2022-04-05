@@ -1,5 +1,4 @@
-﻿const PAGE_SIZE = 20;
-
+﻿
 requirejs.config({
     paths: {
         'text': '../vendors/Scripts/text',
@@ -40,17 +39,7 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'bootstrap'],
 });
 
 
-function doCORSRequest(options, getResult) {
-    var x = new XMLHttpRequest();
-    x.open(options.method, cors_api_url + options.url);
-    x.onload = x.onerror = function () {
-        getResult((x.responseText || ''));
-    };
-    if (/^POST/i.test(options.method)) {
-        x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    }
-    x.send(options.data);
-}
+
 
 
 // Specific functions to access the IMDb API data
@@ -73,7 +62,7 @@ function ajaxHelper(uri, method, data) {
         contentType: 'application/json',
         data: data ? JSON.stringify(data) : null,
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log("AJAX Call[" + uri + "] Fail...");
+           // console.log("AJAX Call[" + uri + "] Fail...");
         }
     });
 };
@@ -99,7 +88,7 @@ function getIMDbIndex(data, name) {
         if (data.d.length == 0) return;
 
     } catch (err) {
-        console.error("getIMDbImage ERROR: ", err);
+      //  console.error("getIMDbImage ERROR: ", err);
         return;
     }
 

@@ -27,7 +27,7 @@
                 <tr class="t-row">
                     <td class="imgTd">
                         <a data-bind="attr: { href:'#TitleDetails/'+Id }">
-                            <img class="imagePoster" data-bind="attr: { src: $parent.getPoster(Name, TypeName), 'id': getTMDbSlug(Name) }" />
+                        <img class="imagePoster" data-bind="attr: { src: $parent.getPoster(Name, TypeName), 'id': getTMDbSlug(Name) }" />
                         </a>
                     </td>
                     <td scope="row" class="">
@@ -43,9 +43,13 @@
                     <button class="btn btn-sm">
                         <i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_'+Id }" title="Selecione para adicionar aos favoritos"></i>
                     </button>-->
-                        <a data-bind="attr: { href:'#TitleDetails/'+Id }" class="btn btn-link">
+                        <a data-bind="attr: { href:'#TitleDetails/'+Id}" class="btn btn-link">
                             <i class="fa fa-info" aria-hidden="true"></i>
+                            
                         </a>
+
+                       
+                        
                     </td>
                 </tr>
             </tbody>
