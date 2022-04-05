@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-﻿
-=======
-﻿const PAGE_SIZE = 20;
 
-const express = require('express');
-const cors = require('cors');
+const PAGE_SIZE = 20;
 
-const app = express();
 
-app.use(cors())
->>>>>>> 44539c206083828173eb1878f5115b5bcf4e1f47
 requirejs.config({
     paths: {
         'text': '../vendors/Scripts/text',
