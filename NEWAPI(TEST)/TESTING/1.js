@@ -13,7 +13,7 @@ $().ready(function () {
 
         data: {
             api_key: '19f84e11932abbc79e6d83f82d6d1045',
-            language: "en-US",
+            anguage: "en-US",
             page: 1,
         },
 

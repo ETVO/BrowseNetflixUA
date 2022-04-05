@@ -1,5 +1,5 @@
 ﻿define(['plugins/router', 'durandal/app'], function (router, app) {
-
+    
     return {
         router: router,
         search: function() {

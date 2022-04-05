@@ -17,7 +17,7 @@
 
                 self.records(data.results);
 
-                console.log('records: ', records());
+                //console.log('records: ', records());
 
             });
             hideLoading();

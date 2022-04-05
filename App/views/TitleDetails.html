@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <img class="detailsPoster" data-bind="attr: { 'id': getTMDbSlug(name()) }" />
+        <img class="detailsPoster" data-bind="attr: { 'id': getTMDbSlug(name()) }"  />
 
         <!--<button  data-bind="attr: { 'id': getTMDbSlug(name()) + '-videoBtn', 'data-toggle': '#' + getTMDbSlug(name()) + '-modal' }" data-toggle="modal">View video</button>-->
         <!-- Modal -->
@@ -37,6 +37,27 @@
             </div>
         </div>
     </div>-->
+    <div id="modal" align="center" style=display:none ="center" class="bs-example">
+        <!-- Button HTML (to Trigger Modal) -->
+        <a href="#myModal"  class="btn btn-primary btn-lg" data-toggle="modal">Play Video</a>
+        
+        <!-- Modal HTML -->
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">YouTube Video</h5>
+                        <button id="play" class="center" type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="embed-responsive embed-responsive-16by9">
+                        <iframe id="cartoonVideo" class="embed-responsive-item" width="560" height="315" src="" allowfullscreen></iframe>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
 
         <hr class="border-bottom-muted" />
 

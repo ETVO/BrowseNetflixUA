@@ -79,10 +79,12 @@ define(['durandal/app'], function (app) {
                 self.pageSize(data.PageSize)
                 self.totalPages(data.TotalPages);
                 self.totalRecords(data.TotalActors);
-
+                
                 //self.SetFavourites();
 
+            console.clear()
             });
+            
             hideLoading();
         };
 
@@ -94,6 +96,7 @@ define(['durandal/app'], function (app) {
             type = 'person';
 
             tmdbImage(name, type, false);
+            
         };
 
 
@@ -102,6 +105,8 @@ define(['durandal/app'], function (app) {
         console.log("pg", pg);
         if (pg == undefined)
             self.activate(1);
-    };
+    
+        };
+    
     return vm
 });
